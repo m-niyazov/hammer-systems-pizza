@@ -7,5 +7,5 @@
 #### Стек на данный момент:
 - Swift
 - UIKit
-- Snap Kit
+- SnapKit
 - Сlean Swift
