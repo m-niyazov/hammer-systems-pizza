@@ -7,7 +7,12 @@
 
 import UIKit
 
+protocol CategoriesCollectionViewDelegate: AnyObject {
+    func selectedCategory(categoryId: Int)
+}
+
 class CategoriesCollectionView: UICollectionView {
+    weak var selfDelegateMethods: CategoriesCollectionViewDelegate?
     var categories: [MenuModels.Category] {
         didSet {
          reloadCollectionView()
@@ -64,6 +69,10 @@ extension CategoriesCollectionView: UICollectionViewDelegate, UICollectionViewDa
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: 90, height: 32)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        selfDelegateMethods?.selectedCategory(categoryId: categories[indexPath.row].id)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {

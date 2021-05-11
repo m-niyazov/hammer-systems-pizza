@@ -48,6 +48,7 @@ final class MenuViewController: UIViewController {
     private func configureNavigationBar() {
         let navigationBar = navigationController?.navigationBar
         navigationBar?.barTintColor = .lightGrayBackground
+         navigationBar?.isTranslucent = false
         navigationBar?.shadowImage = UIImage()
         let leftBarButton = chooseLocationBarButton("Москва")
         leftBarButton.addTarget(self, action: #selector(handleChooseLocationBarButton), for: .touchUpInside)

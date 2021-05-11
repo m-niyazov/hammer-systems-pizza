@@ -21,7 +21,7 @@ enum MenuModels {
         let name: String
         let description: String
         let priceFrom: Int
-        let categoryId: Int?
+        let categoryId: Int
         let categoryName: String
         let image: String
     }

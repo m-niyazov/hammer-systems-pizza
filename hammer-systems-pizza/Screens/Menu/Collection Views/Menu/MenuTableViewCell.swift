@@ -7,23 +7,22 @@
 
 import UIKit
 
-class MenuCollectionViewCell: UICollectionViewCell {
+class MenuTableViewCell: UITableViewCell {
     static let reuseId = "MenuCell"
+    
     var meal: MenuModels.Meal? {
         didSet {
             setViewValues()
+         
         }
     }
+
     
-    let view: UIView = {
-        let view = UIView()
-        return view
-    }()
-    
-    lazy var mainImage: UIImageView = {
-        let imageView = UIImageView()
+    lazy var mainImage: CustomIV = {
+        let imageView = CustomIV()
         imageView.contentMode = .scaleAspectFit
         imageView.clipsToBounds = true
+        
         imageView.snp.makeConstraints { make in
             make.width.equalTo(132)
             make.height.equalTo(132)
@@ -62,6 +61,7 @@ class MenuCollectionViewCell: UICollectionViewCell {
         view.addSubview(title)
         view.addSubview(subtitle)
         view.addSubview(priceButton)
+        
         title.snp.makeConstraints { make in
             make.top.equalToSuperview()
             make.left.equalToSuperview()
@@ -93,27 +93,27 @@ class MenuCollectionViewCell: UICollectionViewCell {
         return stack
     }()
     
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
         configureUI()
+       
     }
-    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
     func configureUI() {
+        backgroundColor = .white
         addSubview(mainStackView)
         mainStackView.snp.makeConstraints { make in
-            make.edges.equalToSuperview().inset(UIEdgeInsets(top: 0, left: 15, bottom: 0, right: 15))
+            make.edges.equalToSuperview().inset(UIEdgeInsets(top: 15, left: 15, bottom: 15, right: 15))
         }
     }
     
     func setViewValues() {
-        mainImage.load(urlString: meal!.image)
         title.text = meal?.name
         subtitle.text = meal?.description
         priceButton.setTitle("От \(meal!.priceFrom) \("₽")", for: .normal)
+        mainImage.loadImage(urlStr: meal!.image)
     }
 }
